@@ -3,6 +3,7 @@ const {errorHandler} =require('./middleware/errorMiddleware.js')
 const dotenv =require('dotenv')
 const colors = require('color')
 const {connectDB} =require('./config/db.js')
+
 dotenv.config()
 
 
