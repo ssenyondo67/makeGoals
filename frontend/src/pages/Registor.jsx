@@ -1,6 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import {useSelector, useDispatch} from 'react-redux'
+import { useNavigate } from "react-router-dom"
+import {toast}  from 'react-toastify'
 import { FaUser} from "react-icons/fa"
-
+import { registor ,reset } from "../features/auth/authSlice"
+import Spinner from "../components/Spinner"
 
 function Registor() {
     const [formData,setFormData]= useState({
@@ -12,6 +16,23 @@ function Registor() {
     
     const {name ,email,password,confirmPass}=formData
 
+    const navigate =useNavigate()
+    const dispatch = useDispatch()
+
+    const {user, isLoading, isError, isSuccess, message} = useSelector((state)=>state.auth)
+     
+    useEffect(()=>{
+      if(isError){
+        toast.error(message)
+      }
+
+      if(isSuccess || user){
+         navigate('/')
+      }
+
+      dispatch(reset())
+    },[user, isError, isSuccess, navigate, dispatch, message])
+
     const handleOnChange =(e)=>{
        setFormData((prevFormData)=>({
           ...prevFormData,
@@ -21,8 +42,20 @@ function Registor() {
 
     function onSubmit(e){
       e.preventDefault()
-    }
 
+      if(password !== confirmPass){
+        toast.error('Passwords do not match!')
+      }else{
+        const userDate = {
+          name,email,password,
+        }
+
+        dispatch(registor(userDate))
+      }
+    }
+  if(isLoading){
+    return <Spinner />
+  }
   return (
     <div className="flex items-center justify-center ">
         <div className="form-container w-full sm:w-1/3 ">
