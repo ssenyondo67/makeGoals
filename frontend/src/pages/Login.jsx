@@ -25,6 +25,7 @@ function Login() {
       
       if(isSuccess || user){
         navigate('/')
+       
       }
 
       dispatch(reset())

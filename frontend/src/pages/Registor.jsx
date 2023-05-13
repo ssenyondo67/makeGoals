@@ -6,6 +6,7 @@ import { FaUser} from "react-icons/fa"
 import { registor ,reset } from "../features/auth/authSlice"
 import Spinner from "../components/Spinner"
 
+
 function Registor() {
     const [formData,setFormData]= useState({
         name: "",
@@ -28,6 +29,7 @@ function Registor() {
 
       if(isSuccess || user){
          navigate('/')
+        
       }
 
       dispatch(reset())
