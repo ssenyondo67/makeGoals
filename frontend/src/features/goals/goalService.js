@@ -4,7 +4,7 @@ const API_URL = 'http://localhost:5001/api/goals/';
 
 //create goal
 const createGoal = async (data,token) => {
-    console.log(token)
+   
     const config = {
         headers:{
             "authorization":`Bearer ${token}`, 
@@ -27,17 +27,17 @@ const getGoals = async (token) => {
     return response.data
 }
 
-// //update goal
-// const updateGoal = async (goalId, data, token) => {
-//     const config = {
-//         header:{
-//             Authorization: `Bearer ${token}`, 
-//         }
-//     }
-//     const response = await axios.post(API_URL+goalId, data ,config)
+//update goal
+const updateGoal = async (goalID, data, token) => {
+    const config = {
+        headers:{
+            authorization: `Bearer ${token}`, 
+        }
+    }
+    const response = await axios.put(API_URL+goalID,data,config)
 
-//     return response.data
-// }
+    return response.data
+}
 
 
 //delete goal
@@ -56,7 +56,7 @@ const deleteGoal = async (goalID, token) => {
 const goalService = {
     getGoals,
     createGoal,
-    // updateGoal,
+    updateGoal,
     deleteGoal,
 }
 

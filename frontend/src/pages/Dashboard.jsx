@@ -2,11 +2,11 @@
 import { useEffect, useState } from "react"
 import { useSelector,useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import GoalForm from "./dashboard/GoalForm"
+import GoalForm from "../components/dashboard/GoalForm"
 import { getGoals, reset } from "../features/goals/goalSlice"
 import { toast } from "react-toastify"
 import Spinner from "../components/Spinner"
-import GoalItem from "./dashboard/GoalItem"
+import GoalItem from "../components/dashboard/GoalItem"
 import {FaRegPlusSquare} from 'react-icons/fa'
 
 function Dashboard() {
@@ -58,7 +58,10 @@ function Dashboard() {
                          goal={goal}
                    />
                 ))
-               }
+
+                }
+               
+               
              </div>
              </>
         ):(
@@ -67,7 +70,8 @@ function Dashboard() {
         )}
         {
           !isaddgoal && ( 
-          <button  className="flex items-center justify-between gap-2 cursor-pointer mt-8" onClick={()=>setIsaddgoal(!isaddgoal)}>
+          <button  className="flex items-center justify-between gap-2 cursor-pointer mt-8"
+           onClick={()=>setIsaddgoal(!isaddgoal)}>
           <FaRegPlusSquare /> <span>Add Goall</span>
       </button>)
         }
